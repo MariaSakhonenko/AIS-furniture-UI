@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>АИС «Изготовление и заказ мебели» — SPA прототип</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">
+      <a href="#home" class="logo">МебельPRO</a>
+      <span class="tagline">Индивидуальное изготовление мебели</span>
+    </div>
+    <nav class="site-nav" aria-label="Основная навигация">
+      <ul>
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#orders">Мои заказы</a></li>
+        <li><a href="#order-form">Оформить заказ</a></li>
+        <li><a href="#order-status">Статус заказа</a></li>
+        <li><a href="#login">Авторизация</a></li>
+        <li><a href="#admin">Админ</a></li>
+        <li><a href="#error">Ошибка</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="site-main">
+    <-- ГЛАВНАЯ -->
+    <section id="home" class="page" aria-labelledby="home-title">
+      <h1 id="home-title">АИС «Изготовление и заказ мебели»</h1>
+      <p class="lead">
+        Заказывайте мебель по индивидуальным параметрам: вид, размеры, материалы, фурнитура.
+        Отслеживайте статус, оплачивайте удобным способом, получайте отчёты.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <h2>Оформление заказов</h2>
+          <p>Заполните форму с деталями: количество, модель, размеры, материалы, фото.</p>
+          <p class="hint">Link to → «Оформить заказ»: <a href="#order-form" class="inline-link">Перейти</a></p>
+        </article>
+        <article class="card">
+          <h2>Отслеживание статуса</h2>
+          <p>Проверяйте состояние: «в очереди», «расчёт стоимости», «ожидание дизайнера» и др.</p>
+          <p class="hint">Link to → «Статус заказа»: <a href="#order-status" class="inline-link">Перейти</a></p>
+        </article>
+        <article class="card">
+          <h2>Оплата</h2>
+          <p>Наличные мастеру, переносная касса или банковский перевод — как вам удобнее.</p>
+          <p class="hint">Button prints invoice → «Мои заказы»: <a href="#orders" class="inline-link">Перейти</a></p>
+        </article>
+        <article class="card">
+          <h2>Учёт и отчётность</h2>
+          <p>Материалы, расходы, графики — данные фиксируются и агрегируются для отчётов.</p>
+          <p class="hint">Link to → «Админ»: <a href="#admin" class="inline-link">Перейти</a></p>
+        </article>
+      </div>
+    </section>
+
+    <-- АВТОРИЗАЦИЯ -->
+    <section id="login" class="page" aria-labelledby="login-title">
+      <h2 id="login-title">Форма авторизации</h2>
+      <form class="form" aria-describedby="login-hint">
+        <fieldset>
+          <legend>Вход</legend>
+          <label for="login-email">Email</label>
+          <input id="login-email" type="email" name="email" placeholder="you@example.com" required />
+
+          <label for="login-pass">Пароль</label>
+          <input id="login-pass" type="password" name="password" placeholder="********" required />
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Войти</button>
+          <a href="#error" class="btn">Забыли пароль?</a>
+        </div>
+        <p id="login-hint" class="hint">
+          Button “Войти” → grants access; on invalid credentials show «Ошибка».
+          Link “Забыли пароль?” → «Ошибка»
+        </p>
+      </form>
+    </section>
+
+    <-- Мои заказы (поиск/просмотр, сортировка/фильтрация, пагинация) -->
+    <section id="orders" class="page" aria-labelledby="orders-title">
+      <h2 id="orders-title">Мои заказы</h2>
+
+      <aside class="toolbar" aria-label="Инструменты поиска и сортировки">
+        <form class="filters">
+          <label for="q">Поиск</label>
+          <input id="q" name="q" type="search" placeholder="Поиск по модели, типу..." />
+          
+          <label for="status">Статус</label>
+          <select id="status" name="status">
+            <option>Все</option>
+            <option>В очереди</option>
+            <option>Расчёт стоимости</option>
+            <option>Ожидание дизайнера</option>
+            <option>Оплачен</option>
+            <option>Выполнен</option>
+          </select>
+
+          <label for="sort">Сортировка</label>
+          <select id="sort" name="sort">
+            <option>Дата создания (новые)</option>
+            <option>Дата создания (старые)</option>
+            <option>Стоимость (↑)</option>
+            <option>Стоимость (↓)</option>
+          </select>
+
+          <button type="submit" class="btn">Применить</button>
+        </form>
+        <p class="hint">
+          Button “Применить” filters list above (mock). Sorting changes card order (visual spec).
+        </p>
+      </aside>
+
+      <div class="list">
+        <article class="card order">
+          <header>
+            <h3>Заказ #A-10245</h3>
+            <span class="status badge">В очереди</span>
+          </header>
+          <ul class="meta">
+            <li><strong>Клиент:</strong> Сахоненко Мария</li>
+            <li><strong>Вид:</strong> Шкаф-купе (стандарт)</li>
+            <li><strong>Материалы:</strong> Дуб, фурнитура Hettich</li>
+            <li><strong>Количество:</strong> 2</li>
+            <li><strong>Предоплата:</strong> 30%</li>
+            <li><strong>Примерная стоимость установки:</strong> 250 BYN</li>
+            <li><strong>Дата создания:</strong> 2025-10-14</li>
+          </ul>
+          <div class="card-actions">
+            <a href="#order-status" class="btn">Статус</a>
+            <a href="#order-edit" class="btn">Редактировать</a>
+            <a href="#order-delete" class="btn danger">Удалить</a>
+            <button class="btn">Печать счёта-фактуры</button>
+          </div>
+          <p class="hint">
+            Button “Печать счёта-фактуры” → generates invoice (mock).
+            Link “Редактировать” → «Редактирование заказа».
+            Link “Удалить” → «Подтверждение удаления».
+          </p>
+        </article>
+
+        <article class="card order">
+          <header>
+            <h3>Заказ #B-77310</h3>
+            <span class="status badge success">Оплачен</span>
+          </header>
+          <ul class="meta">
+            <li><strong>Клиент:</strong> Иванов И.</li>
+            <li><strong>Вид:</strong> Кухонный гарнитур (нестандарт)</li>
+            <li><strong>Материалы:</strong> Ясень, фурнитура Blum</li>
+            <li><strong>Количество:</strong> 1</li>
+            <li><strong>Предоплата:</strong> 50%</li>
+            <li><strong>Стоимость установки:</strong> 400 BYN</li>
+            <li><strong>Дата создания:</strong> 2025-09-28</li>
+          </ul>
+          <div class="card-actions">
+            <a href="#order-status" class="btn">Статус</a>
+            <button class="btn">Печать чека</button>
+          </div>
+          <p class="hint">
+            Button “Печать чека” → printable receipt (mock). Status reflects payment state.
+          </p>
+        </article>
+      </div>
+
+      <nav class="pagination" aria-label="Пагинация">
+        <a href="#orders" class="btn">« Назад</a>
+        <span class="page-info">Стр. 1 из 5</span>
+        <a href="#orders" class="btn">Вперёд »</a>
+        <button class="btn">Загрузить ещё</button>
+      </nav>
+      <p class="hint">
+        Buttons “Назад/Вперёд/Загрузить ещё” paginate list (mock).
+      </p>
+    </section>
+
+    <-- Оформить заказ (добавление) -->
+    <section id="order-form" class="page" aria-labelledby="order-form-title">
+      <h2 id="order-form-title">Оформление заказа</h2>
+      <form class="form" aria-describedby="order-form-hint">
+        <fieldset>
+          <legend>Данные клиента</legend>
+          <label for="client-name">ФИО</label>
+          <input id="client-name" name="client-name" type="text" placeholder="Иванов Иван" required />
+
+          <label for="client-address">Адрес</label>
+          <input id="client-address" name="client-address" type="text" placeholder="г. Минск, ул. ..." required />
+
+          <label for="client-email">Email</label>
+          <input id="client-email" name="client-email" type="email" placeholder="you@example.com" required />
+          
+          <label for="client-phone">Телефон</label>
+          <input id="client-phone" name="client-phone" type="tel" placeholder="+375..." required />
+        </fieldset>
+
+        <fieldset>
+          <legend>Параметры мебели</legend>
+          <label for="furniture-type">Вид мебели</label>
+          <select id="furniture-type" name="furniture-type" required>
+            <option value="">Выберите вид...</option>
+            <option>Шкаф-купе</option>
+            <option>Кухонный гарнитур</option>
+            <option>Стол</option>
+            <option>Тумба</option>
+            <option>Индивидуальный (описать словами)</option>
+          </select>
+
+          <label for="size-w">Размеры (см): ширина</label>
+          <input id="size-w" name="size-w" type="number" min="1" placeholder="Напр. 120" />
+
+          <label for="size-h">высота</label>
+          <input id="size-h" name="size-h" type="number" min="1" placeholder="Напр. 220" />
+
+          <label for="size-d">глубина</label>
+          <input id="size-d" name="size-d" type="number" min="1" placeholder="Напр. 60" />
+
+          <label for="custom-desc">Описание (если нестандарт)</label>
+          <textarea id="custom-desc" name="custom-desc" rows="3" placeholder="Опишите желаемую модель, особенности..."></textarea>
+
+          <label for="photo">Фото (макет/референс)</label>
+          <input id="photo" name="photo" type="file" accept="image/*" />
+        </fieldset>
+
+        <fieldset>
+          <legend>Материалы и количество</legend>
+          <label for="wood-type">Вид дерева</label>
+          <input id="wood-type" name="wood-type" type="text" placeholder="Дуб, ясень..." />
+
+          <label for="hardware-type">Вид фурнитуры</label>
+          <input id="hardware-type" name="hardware-type" type="text" placeholder="Blum, Hettich..." />
+
+          <label for="quantity">Количество</label>
+          <input id="quantity" name="quantity" type="number" min="1" value="1" />
+        </fieldset>
+
+        <fieldset>
+          <legend>Оплата</legend>
+          <div class="radio-group">
+            <label><input type="radio" name="pay" value="cash" /> Наличные мастеру</label>
+            <label><input type="radio" name="pay" value="mobile-pos" /> Переносная касса</label>
+            <label><input type="radio" name="pay" value="bank" /> Банковский перевод</label>
+          </div>
+
+          <label for="prepay">Предоплата (%)</label>
+          <input id="prepay" name="prepay" type="number" min="0" max="100" placeholder="30" />
+
+          <label for="install-cost">Стоимость установки (BYN)</label>
+          <input id="install-cost" name="install-cost" type="number" min="0" placeholder="250" />
+
+          <details class="bank-info">
+            <summary>Банковские реквизиты</summary>
+            <p><strong>Счёт:</strong> BY00 XXXX XXXX XXXX</p>
+            <p><strong>Банк:</strong> ОАО «Пример Банк»</p>
+            <p><strong>Получатель:</strong> ООО «МебельPRO»</p>
+          </details>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Отправить заказ</button>
+          <a href="#orders" class="btn">Отмена</a>
+        </div>
+        <p id="order-form-hint" class="hint">
+          Button “Отправить заказ” → sends confirmation email (mock) including: вид, количество, % предоплаты, стоимость установки, номер счёта.
+          Link “Отмена” → «Мои заказы».
+        </p>
+      </form>
+    </section>
+
+    <-- Статус заказа (просмотр) -->
+    <section id="order-status" class="page" aria-labelledby="order-status-title">
+      <h2 id="order-status-title">Проверить статус заказа</h2>
+      <form class="form" aria-describedby="order-status-hint">
+        <fieldset>
+          <legend>Поиск заказа</legend>
+          <label for="order-id">Номер заказа</label>
+          <input id="order-id" name="order-id" type="text" placeholder="Напр. A-10245" required />
+        </fieldset>
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Проверить</button>
+          <a href="#error" class="btn">Случай ошибки</a>
+        </div>
+        <p id="order-status-hint" class="hint">
+          Button “Проверить” → displays current state: «в очереди», «расчёт стоимости», «ожидание дизайнера», etc.
+          Link “Случай ошибки” → «Ошибка».
+        </p>
+      </form>
+
+      <article class="card status-view">
+        <h3>Заказ #A-10245 — текущий статус</h3>
+        <ul class="meta">
+          <li><strong>Статус:</strong> Ожидание дизайнера</li>
+          <li><strong>Предварительная стоимость:</strong> 1500 BYN</li>
+          <li><strong>Дата предполагаемой поставки:</strong> 2025-12-10</li>
+          <li><strong>Дизайнер:</strong> Петров Д., макет подготовлен</li>
+          <li><strong>Договор:</strong> Подписан</li>
+        </ul>
+        <p class="hint">
+          Designer adds mock-up, calculates cost, signs contract and sets delivery date (per spec).
+        </p>
+      </article>
+    </section>
+
+    <-- Редактирование заказа -->
+    <section id="order-edit" class="page" aria-labelledby="order-edit-title">
+      <h2 id="order-edit-title">Редактирование заказа</h2>
+      <form class="form" aria-describedby="order-edit-hint">
+        <fieldset>
+          <legend>Идентификатор</legend>
+          <label for="edit-order-id">Номер заказа</label>
+          <input id="edit-order-id" name="edit-order-id" type="text" value="A-10245" readonly />
+        </fieldset>
+
+        <fieldset>
+          <legend>Изменяемые поля</legend>
+          <label for="edit-quantity">Количество</label>
+          <input id="edit-quantity" name="edit-quantity" type="number" min="1" value="2" />
+
+          <label for="edit-prepay">Предоплата (%)</label>
+          <input id="edit-prepay" name="edit-prepay" type="number" min="0" max="100" value="30" />
+
+          <label for="edit-install-cost">Стоимость установки (BYN)</label>
+          <input id="edit-install-cost" name="edit-install-cost" type="number" min="0" value="250" />
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Сохранить</button>
+          <a href="#orders" class="btn">Назад к списку</a>
+        </div>
+        <p id="order-edit-hint" class="hint">
+          Button “Сохранить” → updates order (mock). Link “Назад к списку” → «Мои заказы».
+        </p>
+      </form>
+    </section>
+
+    <-- Подтверждение удаления -->
+    <section id="order-delete" class="page" aria-labelledby="order-delete-title">
+      <h2 id="order-delete-title">Удаление заказа</h2>
+      <article class="card danger-zone">
+        <p><strong>Внимание:</strong> Вы собираетесь удалить заказ #A-10245.</p>
+        <div class="form-actions">
+          <button class="btn danger">Удалить</button>
+          <a href="#orders" class="btn">Отмена</a>
+        </div>
+        <p class="hint">
+          Button “Удалить” → removes item (mock). Link “Отмена” → «Мои заказы».
+        </p>
+      </article>
+    </section>
+
+    <-- Ошибка -->
+    <section id="error" class="page" aria-labelledby="error-title">
+      <h2 id="error-title">Ошибка</h2>
+      <article class="card error">
+        <h3>Ничего не найдено / Неверные данные</h3>
+        <p>Проверьте введённые параметры и повторите попытку. Если проблема сохраняется, обратитесь в поддержку.</p>
+        <div class="form-actions">
+          <a href="#login" class="btn">К авторизации</a>
+          <a href="#orders" class="btn">К заказам</a>
+        </div>
+        <p class="hint">
+          Links return user to related pages. Use clear feedback and recovery paths.
+        </p>
+      </article>
+    </section>
+
+    <-- Админ -->
+    <section id="admin" class="page" aria-labelledby="admin-title">
+      <h2 id="admin-title">Администрирование пользователей</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Создать пользователя</h3>
+          <form class="form" aria-describedby="admin-create-hint">
+            <label for="u-name">Имя</label>
+            <input id="u-name" name="u-name" type="text" placeholder="Имя Фамилия" required />
+
+            <label for="u-email">Email</label>
+            <input id="u-email" name="u-email" type="email" placeholder="user@example.com" required />
+
+            <label for="u-role">Роль</label>
+            <select id="u-role" name="u-role">
+              <option>Клиент</option>
+              <option>Дизайнер</option>
+              <option>Мастер</option>
+              <option>Кладовщик</option>
+              <option>Товаровед</option>
+              <option>Менеджер</option>
+              <option>Руководитель</option>
+            </select>
+
+            <div class="form-actions">
+              <button type="submit" class="btn primary">Добавить</button>
+            </div>
+            <p id="admin-create-hint" class="hint">
+              Button “Добавить” → creates account (mock).
+            </p>
+          </form>
+        </article>
+
+        <article class="card">
+          <h3>Список пользователей</h3>
+          <div class="list">
+            <div class="row">
+              <span class="badge">Дизайнер</span>
+              <strong>Петров Д.</strong>
+              <div class="row-actions">
+                <a href="#admin-edit" class="btn">Редактировать</a>
+                <button class="btn danger">Удалить</button>
+              </div>
+            </div>
+            <div class="row">
+              <span class="badge">Кладовщик</span>
+              <strong>Сидорова А.</strong>
+              <div class="row-actions">
+                <a href="#admin-edit" class="btn">Редактировать</a>
+                <button class="btn danger">Удалить</button>
+              </div>
+            </div>
+          </div>
+          <p class="hint">
+            Buttons perform CRUD (mock). Link “Редактировать” → admin edit form.
+          </p>
+        </article>
+      </div>
+
+      <section id="admin-edit" class="subpage" aria-labelledby="admin-edit-title">
+        <h3 id="admin-edit-title">Редактирование пользователя</h3>
+        <form class="form">
+          <label for="u-name-edit">Имя</label>
+          <input id="u-name-edit" type="text" value="Петров Д." />
+          <label for="u-role-edit">Роль</label>
+          <select id="u-role-edit">
+            <option selected>Дизайнер</option>
+            <option>Клиент</option>
+            <option>Мастер</option>
+            <option>Кладовщик</option>
+            <option>Товаровед</option>
+            <option>Менеджер</option>
+            <option>Руководитель</option>
+          </select>
+          <div class="form-actions">
+            <button class="btn primary">Сохранить</button>
+            <a href="#admin" class="btn">Назад</a>
+          </div>
+          <p class="hint">
+            Button “Сохранить” → updates user (mock). Link “Назад” → «Админ».
+          </p>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>ООО «МебельPRO» · Минск · 2025</p>
+      <nav aria-label="Полезные ссылки">
+        <a href="#home">Главная</a>
+        <a href="#orders">Мои заказы</a>
+        <a href="#order-form">Оформить заказ</a>
+        <a href="#order-status">Статус</a>
+      </nav>
+    </div>
+    <p class="footnote">Сайт-спецификация для JavaScript-разработчика: статическая верстка, без JS.</p>
+  </footer>
+</body>
+</html>
