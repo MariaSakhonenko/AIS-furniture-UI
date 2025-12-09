@@ -117,56 +117,9 @@
         </p>
       </aside>
 
-      <div class="list">
-        <article class="card order">
-          <header>
-            <h3>Заказ #A-10245</h3>
-            <span class="status badge">В очереди</span>
-          </header>
-          <ul class="meta">
-            <li><strong>Клиент:</strong> Сахоненко Мария</li>
-            <li><strong>Вид:</strong> Шкаф-купе (стандарт)</li>
-            <li><strong>Материалы:</strong> Дуб, фурнитура Hettich</li>
-            <li><strong>Количество:</strong> 2</li>
-            <li><strong>Предоплата:</strong> 30%</li>
-            <li><strong>Примерная стоимость установки:</strong> 250 BYN</li>
-            <li><strong>Дата создания:</strong> 2025-10-14</li>
-          </ul>
-          <div class="card-actions">
-            <a href="#order-status" class="btn">Статус</a>
-            <a href="#order-edit" class="btn">Редактировать</a>
-            <a href="#order-delete" class="btn danger">Удалить</a>
-            <button class="btn">Печать счёта-фактуры</button>
-          </div>
-          <p class="hint">
-            Button “Печать счёта-фактуры” → generates invoice (mock).
-            Link “Редактировать” → «Редактирование заказа».
-            Link “Удалить” → «Подтверждение удаления».
-          </p>
-        </article>
 
-        <article class="card order">
-          <header>
-            <h3>Заказ #B-77310</h3>
-            <span class="status badge success">Оплачен</span>
-          </header>
-          <ul class="meta">
-            <li><strong>Клиент:</strong> Иванов И.</li>
-            <li><strong>Вид:</strong> Кухонный гарнитур (нестандарт)</li>
-            <li><strong>Материалы:</strong> Ясень, фурнитура Blum</li>
-            <li><strong>Количество:</strong> 1</li>
-            <li><strong>Предоплата:</strong> 50%</li>
-            <li><strong>Стоимость установки:</strong> 400 BYN</li>
-            <li><strong>Дата создания:</strong> 2025-09-28</li>
-          </ul>
-          <div class="card-actions">
-            <a href="#order-status" class="btn">Статус</a>
-            <button class="btn">Печать чека</button>
-          </div>
-          <p class="hint">
-            Button “Печать чека” → printable receipt (mock). Status reflects payment state.
-          </p>
-        </article>
+      <div class="list" id="orders-list-container">
+
       </div>
 
       <nav class="pagination" aria-label="Пагинация">
@@ -467,5 +420,9 @@
     </div>
     <p class="footnote">Сайт-спецификация для JavaScript-разработчика: статическая верстка, без JS.</p>
   </footer>
+<script src="data.js"></script>
+<script src="OrderCollection.js"></script>
+<script src="OrderView.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
