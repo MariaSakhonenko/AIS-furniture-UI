@@ -147,3 +147,84 @@ details.bank-info{border:1px dashed var(--border); border-radius:8px; padding:8p
   .filters{grid-template-columns:1fr}
   .site-nav ul{flex-wrap:wrap}
 }
+
+/* Notifications */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+  max-width: 300px;
+  font-size: 14px;
+}
+
+.notification.success {
+  background: #243a32;
+  color: #a6e9c7;
+  border: 1px solid #2b5747;
+}
+
+.notification.error {
+  background: #3b241f;
+  color: #ffb3a6;
+  border: 1px solid #7a2b1f;
+}
+
+.notification.info {
+  background: #263042;
+  color: #b8c6d9;
+  border: 1px solid #2a3240;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Hello user */
+.user-greeting {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 15px;
+}
+
+/* LOg out button */
+#logout-btn {
+  margin-left: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+/* Pagination */
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Button status without authorisation */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .user-greeting {
+    display: none;
+  }
+  
+  .notification {
+    left: 20px;
+    right: 20px;
+    max-width: none;
+  }
+}
