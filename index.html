@@ -9,22 +9,25 @@
 <body>
 
   <header class="site-header">
-    <div class="brand">
-      <a href="#home" class="logo">МебельPRO</a>
-      <span class="tagline">Индивидуальное изготовление мебели</span>
-    </div>
-    <nav class="site-nav" aria-label="Основная навигация">
-      <ul>
-        <li><a href="#home">Главная</a></li>
-        <li><a href="#orders">Мои заказы</a></li>
-        <li><a href="#order-form">Оформить заказ</a></li>
-        <li><a href="#order-status">Статус заказа</a></li>
-        <li><a href="#login">Авторизация</a></li>
-        <li><a href="#admin">Админ</a></li>
-        <li><a href="#error">Ошибка</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="brand">
+    <a href="#home" class="logo">МебельPRO</a>
+    <span class="tagline">Индивидуальное изготовление мебели</span>
+  </div>
+  
+  <div class="user-greeting" id="user-greeting"></div>
+  
+  <nav class="site-nav" aria-label="Основная навигация">
+    <ul>
+      <li><a href="#home">Главная</a></li>
+      <li><a href="#orders">Мои заказы</a></li>
+      <li><a href="#order-form">Оформить заказ</a></li>
+      <li><a href="#order-status">Статус заказа</a></li>
+      <li><a href="#login" id="login-link">Авторизация</a></li>
+      <li><a href="#admin" id="admin-link" style="display: none;">Админ</a></li>
+      <li><button id="logout-btn" class="btn" style="display: none;">Выйти</button></li>
+    </ul>
+  </nav>
+</header>
 
   <main class="site-main">
     <!-- ГЛАВНАЯ -->
@@ -122,12 +125,12 @@
 
       </div>
 
-      <nav class="pagination" aria-label="Пагинация">
-        <a href="#orders" class="btn">« Назад</a>
-        <span class="page-info">Стр. 1 из 5</span>
-        <a href="#orders" class="btn">Вперёд »</a>
-        <button class="btn">Загрузить ещё</button>
-      </nav>
+    <nav class="pagination" aria-label="Пагинация">
+      <button class="btn prev-page">« Назад</button>
+      <span class="page-info">Стр. 1 из 1</span>
+      <button class="btn next-page">Вперёд »</button>
+      <button class="btn reload-btn" onclick="app.reloadOrders()">Обновить</button>
+    </nav>
       <p class="hint">
         Buttons “Назад/Вперёд/Загрузить ещё” paginate list (mock).
       </p>
