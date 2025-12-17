@@ -285,14 +285,10 @@ class OrderController {
   }
 
   handleAddOrder(form) {
-    if (!this.authController.isAuthenticated()) {
-      this.orderView.showNotification('Требуется авторизация', 'error');
-      this.showPage('login');
-      return;
-    }
-    
+        
     const formData = new FormData(form);
-    const user = this.authController.getUserInfo();
+    const user = this.authController.getUserInfo() || {
+    name: formData.get('client-name') || 'Гость' };
     
     const orderData = {
       id: `ORD-${Date.now()}`,
@@ -326,11 +322,7 @@ class OrderController {
   }
 
   handleDeleteOrder(orderId) {
-    if (!this.authController.hasRole('admin')) {
-      this.orderView.showNotification('Только админ', 'error');
-      return;
-    }
-    
+        
     if (confirm(`Удалить заказ #${orderId}?`)) {
       if (this.orderCollection.removeOrder(orderId)) {
         this.saveOrdersToStorage();
@@ -341,11 +333,7 @@ class OrderController {
   }
 
   handleEditOrder(orderId) {
-    if (!this.authController.hasRole('admin')) {
-      this.orderView.showNotification('Недостаточно прав', 'error');
-      return;
-    }
-    
+   
     const order = this.orderCollection.getOrder(orderId);
     if (!order) return;
     
