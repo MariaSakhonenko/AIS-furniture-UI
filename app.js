@@ -185,6 +185,13 @@ class OrderController {
       });
     }
 
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.handleLogout();
+     });
+    }
     const orderForm = document.querySelector('#order-form form');
     if (orderForm) {
       orderForm.addEventListener('submit', (e) => {
@@ -498,8 +505,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const loginLink = document.querySelector('a[href="#login"]');
   if (loginLink) loginLink.style.display = 'none';
-  const logoutBtn = document.getElementById('logout-btn');
-  if (logoutBtn) logoutBtn.style.display = 'none';
+  // const logoutBtn = document.getElementById('logout-btn');
+  // if (logoutBtn) logoutBtn.style.display = 'none';
   const currentUser = authController.getUserInfo();
   if (currentUser) {
     orderView.setUser(currentUser);
