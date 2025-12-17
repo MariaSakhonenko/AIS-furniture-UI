@@ -253,7 +253,7 @@ class OrderController {
   }
 
   handleLogin(form) {
-  const usernameInput = form.querySelector('input[name="email"]');
+  const usernameInput = form.querySelector('input[name="username"]');
   const passwordInput = form.querySelector('input[name="password"]');
   
   if (!usernameInput || !passwordInput) {
@@ -264,9 +264,7 @@ class OrderController {
   const username = usernameInput.value.trim();
   const password = passwordInput.value;
   
-  const loginName = username.includes('@') ? username.split('@')[0] : username;
-  
-  const result = this.authController.login(loginName, password);
+  const result = this.authController.login(username, password);
   
   if (result.success) {
     this.orderView.showNotification('Успешный вход!', 'success');
