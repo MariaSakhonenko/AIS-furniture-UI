@@ -493,7 +493,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const orderCollection = new OrderCollection(initialOrders);
   const orderView = new OrderView('orders-list-container');
-  
+
+  orderView.setUser({ name: 'Гость', role: 'guest' });
+
+  const loginLink = document.querySelector('a[href="#login"]');
+  if (loginLink) loginLink.style.display = 'none';
+  const logoutBtn = document.getElementById('logout-btn');
+  if (logoutBtn) logoutBtn.style.display = 'none';
   const currentUser = authController.getUserInfo();
   if (currentUser) {
     orderView.setUser(currentUser);
