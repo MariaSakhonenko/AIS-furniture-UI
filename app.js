@@ -253,23 +253,31 @@ class OrderController {
   }
 
   handleLogin(form) {
-    const formData = new FormData(form);
-    const username = formData.get('email');
-    const password = formData.get('password');
-    
-    const result = this.authController.login(username, password);
-    
-    if (result.success) {
-      this.orderView.showNotification('Успешный вход!', 'success');
-      this.orderView.setUser(result.user);
-      this.updateUI();
-      this.showPage('home');
-      form.reset();
-    } else {
-      this.orderView.showNotification(result.message, 'error');
-    }
+  const usernameInput = form.querySelector('input[name="email"]');
+  const passwordInput = form.querySelector('input[name="password"]');
+  
+  if (!usernameInput || !passwordInput) {
+    this.orderView.showNotification('Ошибка формы', 'error');
+    return;
   }
-
+  
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value;
+  
+  const loginName = username.includes('@') ? username.split('@')[0] : username;
+  
+  const result = this.authController.login(loginName, password);
+  
+  if (result.success) {
+    this.orderView.showNotification('Успешный вход!', 'success');
+    this.orderView.setUser(result.user);
+    this.updateUI();
+    this.showPage('home');
+    form.reset();
+  } else {
+    this.orderView.showNotification('Неверный логин или пароль', 'error');
+  }
+}
   handleLogout() {
     this.authController.logout();
     this.orderView.setUser(null);
