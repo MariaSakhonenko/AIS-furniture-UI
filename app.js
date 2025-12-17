@@ -54,14 +54,36 @@ class AuthController {
   }
 
   initDefaultUsers() {
-    if (!localStorage.getItem(this.usersKey)) {
-      const defaultUsers = [
-        { id: 'admin001', username: 'admin', password: 'admin123', role: 'admin', name: 'Администратор' },
-        { id: 'client001', username: 'client', password: 'client123', role: 'client', name: 'Клиент Тестовый' }
-      ];
-      localStorage.setItem(this.usersKey, JSON.stringify(defaultUsers));
-    }
+  if (!localStorage.getItem(this.usersKey)) {
+    const defaultUsers = [
+      { 
+        id: 'admin001', 
+        username: 'admin', 
+        password: 'admin123', 
+        role: 'admin',
+        name: 'Администратор',
+        email: 'admin@furniture.com'
+      },
+      { 
+        id: 'designer001', 
+        username: 'designer', 
+        password: 'design123', 
+        role: 'designer',
+        name: 'Дизайнер Петров',
+        email: 'designer@furniture.com'
+      },
+      { 
+        id: 'client001', 
+        username: 'client', 
+        password: 'client123', 
+        role: 'client',
+        name: 'Клиент Иванов',
+        email: 'client@example.com'
+      }
+    ];
+    localStorage.setItem(this.usersKey, JSON.stringify(defaultUsers));
   }
+}
 
   loadCurrentUser() {
     const userData = localStorage.getItem('currentUser');
