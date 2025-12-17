@@ -263,18 +263,23 @@ class OrderController {
   }
 
   handleFilter(form) {
-    const formData = new FormData(form);
-    this.currentFilters = {};
-    
-    const author = formData.get('q');
-    const status = formData.get('status');
-    
-    if (author) this.currentFilters.author = author;
-    if (status && status !== 'Все') this.currentFilters.status = status;
-    
-    this.currentPage = 0;
-    this.renderOrders();
+  const formData = new FormData(form);
+  this.currentFilters = {};
+  
+  const searchText = formData.get('q');
+  const status = formData.get('status');
+  
+  if (searchText && searchText.trim() !== '') {
+    this.currentFilters.author = searchText.trim();
   }
+  
+  if (status && status !== 'Все') {
+    this.currentFilters.status = status;
+  }
+  
+  this.currentPage = 0;
+  this.renderOrders();
+}
 
   prevPage() {
     if (this.currentPage > 0) {
